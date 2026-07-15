@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { ArrowRight, MapPin, Clock, Star, Waves, Play, Volume2, VolumeX } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import SmokeFishHero from "../components/SmokeFishHero";
 
 export default function Home() {
   const [activeVideo, setActiveVideo] = useState<number | null>(null);
@@ -190,41 +191,8 @@ export default function Home() {
         )}
 
         {heroMode === 'magic' && (
-          <div className="absolute inset-0 bg-[#0d0d0d] flex items-center justify-center overflow-hidden">
-            {/* The Video Behind the hole */}
-            <video 
-              autoPlay 
-              muted 
-              loop 
-              playsInline
-              className="absolute h-[80%] max-w-none object-cover opacity-90"
-              style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)', aspectRatio: '1/1' }}
-            >
-              <source src="/videos/5.mp4" type="video/mp4" />
-            </video>
-
-            {/* The Photo with the hole cut out */}
-            <div className="absolute inset-0 flex justify-center magic-frame-mask pointer-events-none">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                src="/images/straight-interior-wide.png" 
-                alt="Store interior" 
-                className="w-full h-full object-cover object-center opacity-95"
-              />
-            </div>
-
-            {/* Light Overlays (Simulating track lights turning on) */}
-            <div className="absolute inset-0 pointer-events-none max-w-[1400px] mx-auto">
-              <div className="absolute top-[20%] left-[15%] w-16 h-16 bg-white rounded-full blur-[30px] animate-magic-flicker mix-blend-overlay"></div>
-              <div className="absolute top-[18%] left-[38%] w-16 h-16 bg-white rounded-full blur-[30px] animate-magic-flicker delay-100 mix-blend-overlay"></div>
-              <div className="absolute top-[16%] left-[62%] w-16 h-16 bg-white rounded-full blur-[30px] animate-magic-flicker delay-200 mix-blend-overlay"></div>
-              <div className="absolute top-[14%] left-[82%] w-16 h-16 bg-white rounded-full blur-[30px] animate-magic-flicker delay-300 mix-blend-overlay"></div>
-            </div>
-
-            {/* CTA Overlay */}
-            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex gap-4">
-              <Link href="/shop" className="px-10 py-4 rounded-full bg-white text-black font-black text-lg hover:scale-105 transition-transform shadow-[0_20px_50px_rgba(0,0,0,0.5)]">Explore Shop</Link>
-            </div>
+          <div className="w-full relative">
+            <SmokeFishHero />
           </div>
         )}
 
