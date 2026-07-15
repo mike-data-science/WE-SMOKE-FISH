@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Region {
+  US
+  MD
+  BOTH
+}
+
+model Category {
+  id            Int           @id @default(autoincrement())
+  name          String
+  slug          String        @unique
+  products      Product[]
+  subcategories Subcategory[]
+}
+
+model Subcategory {
+  id         Int       @id @default(autoincrement())
+  name       String
+  slug       String    @unique
+  categoryId Int
+  category   Category  @relation(fields: [categoryId], references: [id])
+  products   Product[]
+}
+
+model Product {
+  id          Int         @id @default(autoincrement())
+  name        String
+  description String?
+  slug        String      @unique
+  imageUrl    String?
+  priceUsd    Float?
+  priceMdl    Float?
+  region      Region      @default(BOTH)
+  categoryId    Int
+  category      Category      @relation(fields: [categoryId], references: [id])
+  subcategoryId Int?
+  subcategory   Subcategory?  @relation(fields: [subcategoryId], references: [id])
+  orderItems    OrderItem[]
+}
+
+model Order {
+  id              Int         @id @default(autoincrement())
+  customerName    String
+  email           String
+  phone           String?
+  shippingAddress String?
+  region          String
+  totalAmount     Float
+  status          String      @default("PENDING")
+  createdAt       DateTime    @default(now())
+  items           OrderItem[]
+}
+
+model OrderItem {
+  id              Int     @id @default(autoincrement())
+  orderId         Int
+  productId       Int
+  quantity        Int
+  priceAtPurchase Float
+  order           Order   @relation(fields: [orderId], references: [id])
+  product         Product @relation(fields: [productId], references: [id])
+}
