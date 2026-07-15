@@ -6,6 +6,7 @@ import { useState, useRef } from "react";
 
 export default function Home() {
   const [activeVideo, setActiveVideo] = useState<number | null>(null);
+  const [heroMode, setHeroMode] = useState<'diorama' | 'magic' | 'cinematic'>('diorama');
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const handleVideoPlay = (index: number) => {
@@ -40,77 +41,193 @@ export default function Home() {
       
       {/* ==================== HERO SECTION ==================== */}
       <section className="relative min-h-[92vh] flex items-center overflow-hidden">
-        {/* Background: cinematic video */}
-        <div className="absolute inset-0">
-          <video 
-            autoPlay 
-            muted 
-            loop 
-            playsInline
-            poster="/images/storefront-wide.png"
-            className="w-full h-full object-cover"
-          >
-            <source src="/videos/4.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a]/85 via-[#1a1a1a]/60 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/40 to-transparent" />
+        
+        {/* Toggle Controls (Fixed to left side for demo) */}
+        <div className="absolute top-6 left-6 z-50 flex gap-2 bg-black/50 p-2 rounded-xl backdrop-blur-md">
+          <button onClick={() => setHeroMode('diorama')} className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${heroMode === 'diorama' ? 'bg-[#1a3de8] text-white' : 'text-white/70 hover:bg-white/10'}`}>Digital Diorama</button>
+          <button onClick={() => setHeroMode('magic')} className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${heroMode === 'magic' ? 'bg-[#1a3de8] text-white' : 'text-white/70 hover:bg-white/10'}`}>Magic Frame</button>
+          <button onClick={() => setHeroMode('cinematic')} className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${heroMode === 'cinematic' ? 'bg-[#1a3de8] text-white' : 'text-white/70 hover:bg-white/10'}`}>Cinematic</button>
         </div>
 
-        {/* Floating mascot */}
-        <div className="absolute right-8 bottom-12 hidden lg:block animate-float">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img 
-            src="/images/mascot.jpg" 
-            alt="Cat mascot" 
-            className="h-36 w-36 object-contain drop-shadow-2xl opacity-90"
-          />
-        </div>
-
-        {/* Hero content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 w-full py-20">
-          <div className="max-w-2xl space-y-6">
-            {/* Badge */}
-            <div className="animate-fade-in-up inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2">
-              <Waves className="h-4 w-4 text-[#5b8af5]" />
-              <span className="text-[13px] font-semibold text-white/90 tracking-wide">Artisan Smoked Fish · Chișinău & USA</span>
+        {heroMode === 'cinematic' && (
+          <>
+            {/* Background: cinematic video */}
+            <div className="absolute inset-0">
+              <video 
+                autoPlay 
+                muted 
+                loop 
+                playsInline
+                poster="/images/storefront-wide.png"
+                className="w-full h-full object-cover"
+              >
+                <source src="/videos/4.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a]/85 via-[#1a1a1a]/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/40 to-transparent" />
             </div>
 
-            {/* Heading */}
-            <h1 className="animate-fade-in-up delay-100 text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[0.95] tracking-tight">
-              <span className="block">we</span>
-              <span className="block text-[#4d7aff]">smoke</span>
-              <span className="block">fish</span>
-            </h1>
+            {/* Floating mascot */}
+            <div className="absolute right-8 bottom-12 hidden lg:block animate-float">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img 
+                src="/images/mascot.jpg" 
+                alt="Cat mascot" 
+                className="h-36 w-36 object-contain drop-shadow-2xl opacity-90"
+              />
+            </div>
 
-            <p className="animate-fade-in-up delay-200 text-lg md:text-xl text-white/75 max-w-md leading-relaxed font-light">
-              Premium smoked fish, hand-crafted with tradition and care. From our smokehouse to your table.
-            </p>
+            {/* Hero content */}
+            <div className="relative z-10 max-w-7xl mx-auto px-6 w-full py-20">
+              <div className="max-w-2xl space-y-6">
+                {/* Badge */}
+                <div className="animate-fade-in-up inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2">
+                  <Waves className="h-4 w-4 text-[#5b8af5]" />
+                  <span className="text-[13px] font-semibold text-white/90 tracking-wide">Artisan Smoked Fish · Chișinău & USA</span>
+                </div>
 
-            {/* CTAs */}
-            <div className="animate-fade-in-up delay-300 flex flex-col sm:flex-row gap-4 pt-2">
-              <Link
-                href="/shop"
-                className="group inline-flex items-center justify-center h-13 px-8 rounded-full bg-white text-[#1a1a1a] font-bold text-[15px] hover:bg-white/90 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-xl"
-              >
-                Shop Products
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                href="/about"
-                className="group inline-flex items-center justify-center h-13 px-8 rounded-full border-2 border-white/30 text-white font-semibold text-[15px] hover:bg-white/10 hover:border-white/50 transition-all duration-300"
-              >
-                Our Story
-              </Link>
+                {/* Heading */}
+                <h1 className="animate-fade-in-up delay-100 text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[0.95] tracking-tight">
+                  <span className="block">we</span>
+                  <span className="block text-[#4d7aff]">smoke</span>
+                  <span className="block">fish</span>
+                </h1>
+
+                <p className="animate-fade-in-up delay-200 text-lg md:text-xl text-white/75 max-w-md leading-relaxed font-light">
+                  Premium smoked fish, hand-crafted with tradition and care. From our smokehouse to your table.
+                </p>
+
+                {/* CTAs */}
+                <div className="animate-fade-in-up delay-300 flex flex-col sm:flex-row gap-4 pt-2">
+                  <Link
+                    href="/shop"
+                    className="group inline-flex items-center justify-center h-13 px-8 rounded-full bg-white text-[#1a1a1a] font-bold text-[15px] hover:bg-white/90 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-xl"
+                  >
+                    Shop Products
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                  <Link
+                    href="/about"
+                    className="group inline-flex items-center justify-center h-13 px-8 rounded-full border-2 border-white/30 text-white font-semibold text-[15px] hover:bg-white/10 hover:border-white/50 transition-all duration-300"
+                  >
+                    Our Story
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom wave divider */}
+            <div className="absolute bottom-0 left-0 right-0">
+              <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+                <path d="M0,80 C240,120 480,40 720,80 C960,120 1200,40 1440,80 L1440,120 L0,120 Z" fill="var(--bg)"/>
+              </svg>
+            </div>
+          </>
+        )}
+
+        {heroMode === 'diorama' && (
+          <div className="absolute inset-0 bg-subway-tile flex flex-col justify-between pt-16">
+            {/* Ceiling Wood Panel */}
+            <div className="absolute top-0 left-0 right-0 h-32 md:h-40 bg-wood-panel flex justify-around items-end pb-0 z-20">
+              {/* Track lights hanging */}
+              {[1, 2, 3, 4, 5, 6].map((light) => (
+                <div key={light} className="relative w-5 h-10 md:w-8 md:h-14 bg-[#1a1a1a] rounded-b-md shadow-lg before:content-[''] before:absolute before:-top-4 before:left-1/2 before:-translate-x-1/2 before:w-2 before:h-4 before:bg-[#2a2a2a]">
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-2 bg-white rounded-b-sm animate-power-on" style={{ animationDelay: `${light * 0.15}s` }}></div>
+                </div>
+              ))}
+            </div>
+
+            <div className="relative flex-1 flex flex-col md:flex-row items-center max-w-7xl mx-auto w-full px-6 pt-24 z-10 gap-8">
+              {/* Left Wall Logo */}
+              <div className="flex-1 flex justify-center md:justify-start">
+                <h1 className="text-6xl md:text-[100px] lg:text-[130px] font-black text-foreground leading-[0.85] tracking-tighter mix-blend-multiply opacity-90 drop-shadow-sm">
+                  <span className="block text-black">we</span>
+                  <span className="block text-[#e81414]">smoke</span>
+                  <span className="block text-black ml-2 md:ml-4">fish</span>
+                </h1>
+              </div>
+
+              {/* Center Circular Window (Geam) */}
+              <div className="relative w-64 h-64 md:w-[400px] md:h-[400px] rounded-full overflow-hidden border-[16px] border-[#d29457] shadow-[inset_0_20px_50px_rgba(0,0,0,0.5),0_20px_50px_rgba(0,0,0,0.2)] flex-shrink-0 animate-scale-in">
+                <video 
+                  autoPlay 
+                  muted 
+                  loop 
+                  playsInline
+                  className="w-full h-full object-cover scale-[1.15]"
+                >
+                  <source src="/videos/5.mp4" type="video/mp4" />
+                </video>
+                <div className="absolute top-6 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md px-5 py-1.5 rounded-full text-black font-black text-sm tracking-[0.2em] uppercase shadow-md">Geam</div>
+              </div>
+
+              <div className="hidden md:block flex-1"></div>
+            </div>
+
+            {/* Bottom Display Cases */}
+            <div className="h-48 md:h-64 w-full bg-white border-t border-gray-200 relative overflow-hidden flex justify-center gap-4 md:gap-12 px-4 md:px-12 z-20">
+              {/* 3D Glass case simulation */}
+              <div className="w-[45%] h-full bg-[#f8f9fa] border-t-[24px] border-[#1a1a1a] shadow-[inset_0_20px_30px_rgba(0,0,0,0.08)] rounded-t-xl relative before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/60 before:to-transparent flex items-end justify-center pb-8">
+                <div className="w-3/4 h-3/4 bg-[#e5e5e5] rounded shadow-inner flex flex-wrap gap-2 p-2">
+                   {/* Fake product trays */}
+                   <div className="w-[45%] h-[40%] bg-[#d2b48c] rounded-sm opacity-80"></div>
+                   <div className="w-[45%] h-[40%] bg-[#cd853f] rounded-sm opacity-80"></div>
+                   <div className="w-[45%] h-[40%] bg-[#e0d6c8] rounded-sm opacity-80"></div>
+                   <div className="w-[45%] h-[40%] bg-[#b87333] rounded-sm opacity-80"></div>
+                </div>
+              </div>
+              <div className="w-[45%] h-full bg-[#f8f9fa] border-t-[24px] border-[#1a1a1a] shadow-[inset_0_20px_30px_rgba(0,0,0,0.08)] rounded-t-xl relative before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/60 before:to-transparent flex items-end justify-center pb-8">
+                <div className="w-3/4 h-3/4 bg-[#e5e5e5] rounded shadow-inner flex flex-wrap gap-2 p-2">
+                   {/* Fake product trays */}
+                   <div className="w-[45%] h-[40%] bg-[#a0522d] rounded-sm opacity-80"></div>
+                   <div className="w-[45%] h-[40%] bg-[#8b4513] rounded-sm opacity-80"></div>
+                   <div className="w-[45%] h-[40%] bg-[#f4a460] rounded-sm opacity-80"></div>
+                   <div className="w-[45%] h-[40%] bg-[#d2691e] rounded-sm opacity-80"></div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
-        {/* Bottom wave divider */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
-            <path d="M0,80 C240,120 480,40 720,80 C960,120 1200,40 1440,80 L1440,120 L0,120 Z" fill="var(--bg)"/>
-          </svg>
-        </div>
+        {heroMode === 'magic' && (
+          <div className="absolute inset-0 bg-[#0d0d0d] flex items-center justify-center overflow-hidden">
+            {/* The Video Behind the hole */}
+            <video 
+              autoPlay 
+              muted 
+              loop 
+              playsInline
+              className="absolute h-[80%] max-w-none object-cover opacity-90"
+              style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)', aspectRatio: '1/1' }}
+            >
+              <source src="/videos/5.mp4" type="video/mp4" />
+            </video>
+
+            {/* The Photo with the hole cut out */}
+            <div className="absolute inset-0 flex justify-center magic-frame-mask pointer-events-none">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img 
+                src="/images/straight-interior-wide.png" 
+                alt="Store interior" 
+                className="w-full h-full object-cover object-center opacity-95"
+              />
+            </div>
+
+            {/* Light Overlays (Simulating track lights turning on) */}
+            <div className="absolute inset-0 pointer-events-none max-w-[1400px] mx-auto">
+              <div className="absolute top-[20%] left-[15%] w-16 h-16 bg-white rounded-full blur-[30px] animate-magic-flicker mix-blend-overlay"></div>
+              <div className="absolute top-[18%] left-[38%] w-16 h-16 bg-white rounded-full blur-[30px] animate-magic-flicker delay-100 mix-blend-overlay"></div>
+              <div className="absolute top-[16%] left-[62%] w-16 h-16 bg-white rounded-full blur-[30px] animate-magic-flicker delay-200 mix-blend-overlay"></div>
+              <div className="absolute top-[14%] left-[82%] w-16 h-16 bg-white rounded-full blur-[30px] animate-magic-flicker delay-300 mix-blend-overlay"></div>
+            </div>
+
+            {/* CTA Overlay */}
+            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex gap-4">
+              <Link href="/shop" className="px-10 py-4 rounded-full bg-white text-black font-black text-lg hover:scale-105 transition-transform shadow-[0_20px_50px_rgba(0,0,0,0.5)]">Explore Shop</Link>
+            </div>
+          </div>
+        )}
+
       </section>
 
       {/* ==================== STATS BAR ==================== */}

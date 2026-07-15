@@ -124,6 +124,50 @@ body {
 .delay-500 { animation-delay: 0.5s; }
 .delay-600 { animation-delay: 0.6s; }
 
+/* ========== INTERIOR HERO CSS ========== */
+
+.bg-subway-tile {
+  background-color: #f8f9fa;
+  background-image: 
+    linear-gradient(to right, rgba(26, 61, 232, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(26, 61, 232, 0.15) 1px, transparent 1px);
+  background-size: 60px 30px;
+}
+
+.bg-wood-panel {
+  background-color: #d29457;
+  background-image: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.15) 100%);
+  border-bottom: 6px solid #ab733c;
+}
+
+@keyframes powerOn {
+  0% { opacity: 0; box-shadow: none; }
+  10% { opacity: 0.8; box-shadow: 0 40px 60px -10px rgba(255,255,255,0.4); }
+  20% { opacity: 0; box-shadow: none; }
+  30% { opacity: 1; box-shadow: 0 60px 80px -10px rgba(255,255,255,0.6); }
+  40% { opacity: 0.2; box-shadow: none; }
+  50%, 100% { opacity: 1; box-shadow: 0 80px 100px -10px rgba(255,255,255,0.8), 0 20px 40px -5px rgba(255,255,255,0.5); }
+}
+
+.animate-power-on {
+  animation: powerOn 2s ease-in-out forwards;
+}
+
+@keyframes magicFlicker {
+  0%, 100% { opacity: 1; filter: brightness(1); }
+  50% { opacity: 0.8; filter: brightness(1.2); }
+}
+
+.animate-magic-flicker {
+  animation: magicFlicker 3s ease-in-out infinite alternate;
+}
+
+.magic-frame-mask {
+  /* Cuts a transparent hole in the image where the real window is */
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, transparent 12%, black 12.5%);
+  mask-image: radial-gradient(circle at 50% 50%, transparent 12%, black 12.5%);
+}
+
 /* ========== WAVE SVG BACKGROUND ========== */
 
 .wave-bg {
