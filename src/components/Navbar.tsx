@@ -16,7 +16,6 @@ export default function Navbar() {
   const links = [
     { name: 'Home', href: '/' },
     { name: 'Products', href: '/shop' },
-    { name: 'Catering', href: '/catering' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' }
   ];
@@ -27,12 +26,7 @@ export default function Navbar() {
         {/* Left: Logo */}
         <div className="flex items-center">
           <Link href="/" className="flex items-center gap-3 group">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
-              src="/images/mascot.jpg" 
-              alt="We Smoke Fish mascot" 
-              className="h-10 w-10 rounded-full object-cover border-2 border-white shadow-md group-hover:scale-105 transition-transform duration-300" 
-            />
+
             <div className="flex flex-col items-start" style={{ lineHeight: '0.85', letterSpacing: '-0.02em' }}>
               <span className="text-[15px] font-extrabold text-foreground self-center">we</span>
               <span className="text-[20px] font-black text-accent">smoke</span>
@@ -58,18 +52,7 @@ export default function Navbar() {
 
         {/* Right: Actions */}
         <div className="hidden md:flex items-center gap-5">
-          {currentRegion && (
-            <div className="flex items-center gap-1.5 text-[11px] font-semibold text-muted bg-warm py-1.5 px-3.5 rounded-full border border-border">
-              <MapPin className="h-3 w-3 text-coral" />
-              <span>{currentRegion === 'US' ? 'US' : 'MD'}</span>
-              <button 
-                onClick={() => setRegion(currentRegion === 'US' ? 'MD' : 'US')}
-                className="ml-1 text-accent hover:text-accent-hover font-bold"
-              >
-                Switch
-              </button>
-            </div>
-          )}
+
           
           <div className="flex items-center gap-3.5 text-foreground">
             <button className="h-9 w-9 rounded-full hover:bg-warm flex items-center justify-center transition-colors duration-200">
@@ -110,18 +93,7 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
-          {currentRegion && (
-            <div className="flex items-center gap-2 py-3 px-4 mt-2 text-sm text-muted">
-              <MapPin className="h-4 w-4 text-coral" />
-              <span>{currentRegion === 'US' ? 'United States' : 'Moldova'}</span>
-              <button 
-                onClick={() => setRegion(currentRegion === 'US' ? 'MD' : 'US')}
-                className="ml-auto text-accent font-semibold"
-              >
-                Switch Region
-              </button>
-            </div>
-          )}
+
         </div>
       )}
     </nav>
