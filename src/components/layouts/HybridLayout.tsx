@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ArrowRight, MapPin, Clock, Star } from "lucide-react";
 import HybridHero from "../HybridHero";
 import photoBg from "../../../recreate_picture_better_qualities_2K_202607160953.jpeg";
-import productsBg from "../../../Fish_market_display_case_products_202607161742.jpeg";
 
 
 import { useRegionStore } from '@/store/useRegionStore';
@@ -42,7 +41,7 @@ export default function HybridLayout({
         {/* ==================== HERO SECTION ==================== */}
         <section className="relative border-b-[8px] border-[#2a140a]">
           {renderToggleButtons()}
-          <HybridHero heroBgSrc={photoBg.src} displayCaseBgSrc={productsBg.src} />
+          <HybridHero heroBgSrc={photoBg.src} />
         </section>
 
         {/* ==================== SCROLLING MARQUEE (CSS WOOD TEXTURE) ==================== */}
