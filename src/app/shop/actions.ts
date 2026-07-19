@@ -2,10 +2,17 @@
 
 import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
+let prismaInstance: PrismaClient;
 
+function getPrisma() {
+  if (!prismaInstance) {
+    prismaInstance = new PrismaClient();
+  }
+  return prismaInstance;
+}
 export async function getShopData() {
   try {
+    const prisma = getPrisma();
     const categories = await prisma.category.findMany();
     const products = await prisma.product.findMany({
       include: {
@@ -21,6 +28,7 @@ export async function getShopData() {
 
 export async function getProductBySlug(slug: string) {
   try {
+    const prisma = getPrisma();
     const product = await prisma.product.findUnique({
       where: { slug },
       include: { category: true }

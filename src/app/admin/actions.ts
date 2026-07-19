@@ -4,7 +4,14 @@ import { PrismaClient } from '@prisma/client';
 import { writeFile } from 'fs/promises';
 import { join } from 'path';
 
-const prisma = new PrismaClient();
+let prismaInstance: PrismaClient;
+
+function getPrisma() {
+  if (!prismaInstance) {
+    prismaInstance = new PrismaClient();
+  }
+  return prismaInstance;
+}
 
 export async function uploadImage(formData: FormData) {
   try {
@@ -29,6 +36,7 @@ export async function uploadImage(formData: FormData) {
 
 export async function getDashboardStats() {
   try {
+    const prisma = getPrisma();
     const totalOrders = await prisma.order.count();
     const totalProducts = await prisma.product.count();
     
@@ -61,6 +69,7 @@ export async function getDashboardStats() {
 
 export async function getAdminOrders() {
   try {
+    const prisma = getPrisma();
     return await prisma.order.findMany({
       orderBy: { createdAt: 'desc' },
       include: {
@@ -79,6 +88,7 @@ export async function getAdminOrders() {
 
 export async function getAdminProducts() {
   try {
+    const prisma = getPrisma();
     return await prisma.product.findMany({
       include: {
         category: true,
@@ -94,6 +104,7 @@ export async function getAdminProducts() {
 
 export async function getAdminCategories() {
   try {
+    const prisma = getPrisma();
     return await prisma.category.findMany({
       include: {
         subcategories: true
@@ -108,6 +119,7 @@ export async function getAdminCategories() {
 
 export async function createCategory(data: { name: string; slug: string }) {
   try {
+    const prisma = getPrisma();
     const category = await prisma.category.create({ data });
     return { success: true, category };
   } catch (error: any) {
@@ -117,6 +129,7 @@ export async function createCategory(data: { name: string; slug: string }) {
 
 export async function createSubcategory(data: { name: string; slug: string; categoryId: number }) {
   try {
+    const prisma = getPrisma();
     const subcategory = await prisma.subcategory.create({ data });
     return { success: true, subcategory };
   } catch (error: any) {
@@ -126,6 +139,7 @@ export async function createSubcategory(data: { name: string; slug: string; cate
 
 export async function updateCategory(id: number, data: { name: string; slug: string }) {
   try {
+    const prisma = getPrisma();
     const category = await prisma.category.update({ where: { id }, data });
     return { success: true, category };
   } catch (error: any) {
@@ -135,6 +149,7 @@ export async function updateCategory(id: number, data: { name: string; slug: str
 
 export async function deleteCategory(id: number) {
   try {
+    const prisma = getPrisma();
     // Check if category has products
     const productCount = await prisma.product.count({ where: { categoryId: id } });
     if (productCount > 0) {
@@ -149,6 +164,7 @@ export async function deleteCategory(id: number) {
 
 export async function updateSubcategory(id: number, data: { name: string; slug: string }) {
   try {
+    const prisma = getPrisma();
     const subcategory = await prisma.subcategory.update({ where: { id }, data });
     return { success: true, subcategory };
   } catch (error: any) {
@@ -158,6 +174,7 @@ export async function updateSubcategory(id: number, data: { name: string; slug: 
 
 export async function deleteSubcategory(id: number) {
   try {
+    const prisma = getPrisma();
     const productCount = await prisma.product.count({ where: { subcategoryId: id } });
     if (productCount > 0) {
       return { success: false, error: `Cannot delete subcategory because it contains ${productCount} products.` };
@@ -181,6 +198,7 @@ export async function createProduct(data: {
   subcategoryId?: number;
 }) {
   try {
+    const prisma = getPrisma();
     // If subcategoryId is -1 or null, we shouldn't pass it.
     const productData: any = { ...data };
     if (!productData.subcategoryId || productData.subcategoryId < 0) {
@@ -195,6 +213,7 @@ export async function createProduct(data: {
 
 export async function updateProduct(id: number, data: any) {
   try {
+    const prisma = getPrisma();
     const productData = { ...data };
     if (!productData.subcategoryId || productData.subcategoryId <= 0) {
       productData.subcategoryId = null; // Disconnect subcategory if null
@@ -211,6 +230,7 @@ export async function updateProduct(id: number, data: any) {
 
 export async function deleteProduct(id: number) {
   try {
+    const prisma = getPrisma();
     // Check if product is referenced in any orders
     const orderCount = await prisma.orderItem.count({
       where: { productId: id }
@@ -231,6 +251,7 @@ export async function deleteProduct(id: number) {
 
 export async function getProduct(id: number) {
   try {
+    const prisma = getPrisma();
     return await prisma.product.findUnique({
       where: { id }
     });
