@@ -3,12 +3,9 @@
 import Link from "next/link";
 import { ArrowRight, MapPin, Clock, Star } from "lucide-react";
 import HybridHero from "../HybridHero";
-import photoBg from "../../../recreate_picture_better_qualities_2K_202607160953.jpeg";
-
 
 import { useRegionStore } from '@/store/useRegionStore';
 import { useEffect, useRef } from "react";
-import bricksBg from "../../../materials/bricks.jpeg";
 
 export default function HybridLayout({ 
   renderToggleButtons, 
@@ -41,7 +38,7 @@ export default function HybridLayout({
         {/* ==================== HERO SECTION ==================== */}
         <section className="relative border-b-[8px] border-[#2a140a]">
           {renderToggleButtons()}
-          <HybridHero heroBgSrc={photoBg.src} />
+          <HybridHero heroBgSrc="/images/recreate_picture_better_qualities_2K_202607160953.jpeg" />
         </section>
 
         {/* ==================== SCROLLING MARQUEE (CSS WOOD TEXTURE) ==================== */}
@@ -73,7 +70,7 @@ export default function HybridLayout({
         <section 
           className="py-24 relative overflow-hidden border-b-[8px] border-[#2a140a] shadow-[inset_0_20px_50px_rgba(0,0,0,0.9)]"
           style={{
-            backgroundImage: `url(${bricksBg.src})`,
+            backgroundImage: `url(/images/bricks.jpeg)`,
             backgroundSize: '800px auto', // Tiling size
             backgroundRepeat: 'repeat',
             backgroundPosition: 'center top'

@@ -2,9 +2,11 @@
 
 import { Mail, Clock, MapPin } from "lucide-react";
 import { useRegionStore } from "@/store/useRegionStore";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function ContactPage() {
   const { region, isHydrated } = useRegionStore();
+  const { t } = useTranslation();
   const showMoldova = !isHydrated || region === 'MD' || region === null;
   const showUS = !isHydrated || region === 'US' || region === null;
 
@@ -14,12 +16,12 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="relative py-20 overflow-hidden wave-lines">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <span className="text-sm font-semibold text-accent uppercase tracking-wider">Contact</span>
+          <span className="text-sm font-semibold text-accent uppercase tracking-wider">{t('nav.contact')}</span>
           <h1 className="text-5xl md:text-6xl font-black text-foreground mt-3 tracking-tight animate-fade-in-up">
-            Get in Touch
+            {t('contact.get_in_touch')}
           </h1>
           <p className="text-lg text-muted mt-4 animate-fade-in-up delay-100 max-w-md mx-auto">
-            We&apos;d love to hear from you. Reach out to our team in the US or Moldova.
+            {t('contact.subtitle')}
           </p>
         </div>
       </section>
@@ -35,8 +37,8 @@ export default function ContactPage() {
               <div className="flex items-center gap-3 mb-8">
                 <span className="text-4xl">🇺🇸</span>
                 <div>
-                  <h2 className="text-2xl font-bold text-foreground">United States</h2>
-                  <p className="text-sm text-muted">Nationwide Shipping</p>
+                  <h2 className="text-2xl font-bold text-foreground">{t('footer.usa')}</h2>
+                  <p className="text-sm text-muted">{t('contact.nationwide_shipping')}</p>
                 </div>
               </div>
               
@@ -46,7 +48,7 @@ export default function ContactPage() {
                     <Mail className="h-5 w-5 text-accent" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted mb-0.5 uppercase tracking-wider font-medium">Email</p>
+                    <p className="text-xs text-muted mb-0.5 uppercase tracking-wider font-medium">{t('contact.email')}</p>
                     <a href="mailto:wesmokefish@gmail.com" className="text-foreground font-semibold hover:text-accent transition-colors">
                       wesmokefish@gmail.com
                     </a>
@@ -58,8 +60,8 @@ export default function ContactPage() {
                     <MapPin className="h-5 w-5 text-accent" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted mb-0.5 uppercase tracking-wider font-medium">Service</p>
-                    <p className="text-foreground font-semibold">Nationwide Delivery</p>
+                    <p className="text-xs text-muted mb-0.5 uppercase tracking-wider font-medium">{t('contact.service')}</p>
+                    <p className="text-foreground font-semibold">{t('contact.nationwide_delivery')}</p>
                   </div>
                 </div>
               </div>
@@ -73,8 +75,8 @@ export default function ContactPage() {
               <div className="flex items-center gap-3 mb-8">
                 <span className="text-4xl">🇲🇩</span>
                 <div>
-                  <h2 className="text-2xl font-bold text-foreground">Moldova</h2>
-                  <p className="text-sm text-muted">Flagship Store</p>
+                  <h2 className="text-2xl font-bold text-foreground">{t('footer.moldova')}</h2>
+                  <p className="text-sm text-muted">{t('contact.flagship_store')}</p>
                 </div>
               </div>
               
@@ -84,7 +86,7 @@ export default function ContactPage() {
                     <Mail className="h-5 w-5 text-accent" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted mb-0.5 uppercase tracking-wider font-medium">Email</p>
+                    <p className="text-xs text-muted mb-0.5 uppercase tracking-wider font-medium">{t('contact.email')}</p>
                     <a href="mailto:wesmokefishmd@gmail.com" className="text-foreground font-semibold hover:text-accent transition-colors">
                       wesmokefishmd@gmail.com
                     </a>
@@ -96,7 +98,7 @@ export default function ContactPage() {
                     <MapPin className="h-5 w-5 text-accent" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted mb-0.5 uppercase tracking-wider font-medium">Address</p>
+                    <p className="text-xs text-muted mb-0.5 uppercase tracking-wider font-medium">{t('contact.address')}</p>
                     <p className="text-foreground font-semibold">Șoseaua Balcani 7B, Chișinău</p>
                   </div>
                 </div>
@@ -106,8 +108,8 @@ export default function ContactPage() {
                     <Clock className="h-5 w-5 text-accent" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted mb-0.5 uppercase tracking-wider font-medium">Hours</p>
-                    <p className="text-foreground font-semibold">10:00 – 22:00 Daily</p>
+                    <p className="text-xs text-muted mb-0.5 uppercase tracking-wider font-medium">{t('contact.hours')}</p>
+                    <p className="text-foreground font-semibold">{t('contact.hours_daily')}</p>
                   </div>
                 </div>
               </div>
@@ -125,8 +127,8 @@ export default function ContactPage() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/images/mascot.jpg" alt="Mascot" className="h-14 w-14 object-contain drop-shadow-lg" />
                 <div>
-                  <h3 className="text-white font-bold text-xl">Come Visit Us!</h3>
-                  <p className="text-white/70 text-sm">We&apos;d love to meet you at our Chișinău store</p>
+                  <h3 className="text-white font-bold text-xl">{t('contact.visit_us')}</h3>
+                  <p className="text-white/70 text-sm">{t('contact.visit_desc')}</p>
                 </div>
               </div>
             </div>

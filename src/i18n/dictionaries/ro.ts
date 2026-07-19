@@ -1,0 +1,161 @@
+export const ro = {
+  nav: {
+    home: "Acasă",
+    products: "Produse",
+    shop: "Magazin",
+    about: "Despre",
+    contact: "Contact",
+    premium_variant: "Varianta Premium",
+    cinematic: "Cinematic",
+    presentation: "Prezentare"
+  },
+  hero: {
+    subtitle: "O simfonie de fum și mare",
+    title_prefix: "Descoperă",
+    title_main: "Arta Afumării",
+    description: "Experimentează o tradiție reimaginată. Afumat lent pe lemn selecționat pentru o textură de neuitat care se topește în gură.",
+    preorder: "Colecția de Precomandă",
+    discover: "Descoperă Procesul Nostru",
+    variant_a: "Varianta A",
+    variant_b: "Varianta B",
+    wait_is_over_1: "AȘTEPTAREA",
+    wait_is_over_2: "S-A ÎNCHEIAT",
+    we_are_1: "Ne-am",
+    we_are_2: "aa",
+    we_are_3: "b",
+    open: "Deschis",
+    scroll_down: "Derulează în Jos",
+    scroll: "Derulează",
+    display_style: "Stil Afișare",
+    empty_tray: "Tavă Goală",
+    style_authentic: "Autentic",
+    style_modern: "Modern",
+    style_smokehouse: "Lemn Alb"
+  },
+  products: {
+    subtitle: "Proaspăt din Afumătoare",
+    title: "Selecție Artizanală",
+    view_all: "Vezi Toate Produsele",
+    unit: "100g"
+  },
+  gallery: {
+    subtitle: "În spatele scenelor",
+    title: "În Interiorul Afumătorii",
+    meet_makers: "Cunoaște Maeștrii",
+    watch_tiktok: "Urmărește-ne pe TikTok"
+  },
+  testimonials: {
+    subtitle: "Recenzii",
+    title: "Ce spun clienții noștri",
+    description: "Descoperă ce are de spus comunitatea noastră despre gustul inegalabil al somonului nostru afumat artizanal.",
+    google_review: "Recenzie Google"
+  },
+  location: {
+    subtitle: "Locație",
+    title: "Unde ne găsești",
+    address: "Șos. Balcani 7B",
+    phone: "Tel. 061222213",
+    schedule: "Luni - Dum:",
+    hours: "10:00 - 22:00",
+    get_directions: "Obține Indicații"
+  },
+  outro: {
+    title: "Gustă Fumul Autentic",
+    enter_shop: "Intră în Magazin"
+  },
+  cinematic: {
+    hero_subtitle: "Călătoria",
+    hero_title: "O Moștenire a Fumului",
+    hero_desc: "The director's cut al peștelui afumat. Calitate fără compromisuri, aromă cinematică.",
+    explore: "Explorează Colecția",
+    featured_subtitle: "Roluri Principale",
+    featured_title: "Distribuția",
+    view_full_cast: "Vezi Toată Distribuția",
+    view_details: "Vezi Detalii",
+    classic: "Clasic",
+    reserve: "Rezervă",
+    social_echo: "Ecou Social",
+    the_vibe: "Atmosfera",
+    tag_sustainable: "Sursă Sustenabilă",
+    tag_premium: "Somon Premium",
+    tag_wild: "Sălbatic"
+  },
+  premium: {
+    hero_title: "Cea Mai Bună Tranșă",
+    hero_desc: "Rezervat pentru adevărații cunoscători.",
+    join_waitlist: "Lista de Așteptare",
+    explore: "Explorează",
+    community_title1: "Comunitate &",
+    community_title2: "Artizanat",
+    community_desc: "Vezi ce spune comunitatea noastră și urmărește meșteșugul în acțiune. Dă-ne tag pe Instagram sau TikTok pentru a fi menționat.",
+    footer_desc: "Apogeul absolut al peștelui afumat tradițional. Calitate fără compromisuri și foc real de lemne.",
+    menu: "Meniu",
+    social: "Social",
+    newsletter: "Abonare",
+    subscribe: "Abonați-vă",
+    enter_email: "Introduceți emailul",
+    find: "Găsește",
+    us: "Ne",
+    hq_title: "Sediul Moldova",
+    hq_address: "Strada Afumători 12, Chișinău, Moldova",
+    hq_hours: "Deschis 10:00 - 22:00",
+    our_story: "Povestea Noastră",
+    locations: "Locații"
+  },
+  menu: {
+    get_in_touch: "Contactați-ne"
+  },
+  shop: {
+    categories: "Categorii",
+    all_products: "Toate Produsele",
+    showing_products_for: "Afișare produse pentru",
+    no_products_found: "Nu s-au găsit produse",
+    no_products_desc: "Baza de date nu a fost populată încă. Vă rugăm să rulați comanda seed pentru a popula magazinul."
+  },
+  about: {
+    about_us: "Despre Noi",
+    title: "Povestea Noastră",
+    smokehouse: "Afumătoarea",
+    heading: "Produs în Totalitate\nDe Noi",
+    desc1: "Oferim pește afumat, pește uscat și alte delicatese pregătite cu grijă pentru un gust autentic și prospețime. Facilitatea noastră de producție de ultimă generație din Chișinău asigură că fiecare produs îndeplinește cele mai înalte standarde de calitate.",
+    desc2: "Fiecare bucată de pește este selectată manual, porționată cu grijă și preparată folosind rețete care au fost perfecționate de-a lungul generațiilor. Credem în transparență, calitate și arta afumării lente.",
+    point1: "Materiile prime sunt porționate și pregătite cu grijă",
+    point2: "Rețete aprobate cu generații de istorie",
+    point3: "Control strict al calității la fiecare etapă de producție",
+    values_title: "Ceea Ce Reprezentăm",
+    values_subtitle: "Valorile noastre ghidează fiecare produs pe care îl facem",
+    val1_title: "Calitate Premium",
+    val1_desc: "Doar cel mai bun pește, afumat lent folosind metode testate în timp pentru o aromă inegalabilă.",
+    val2_title: "Artizanat Tradițional",
+    val2_desc: "Rețete transmise din generație în generație, păstrând gustul autentic al afumării artizanale.",
+    val3_title: "Valori de Familie",
+    val3_desc: "O afacere de familie bazată pe încredere, integritate și pasiunea de a hrăni oamenii bine.",
+    store_title: "Magazinul Principal Chișinău",
+    store_hours: "Șoseaua Balcani 7B · Deschis 10:00–22:00",
+    store_desc: "Vizitați locația noastră principală care oferă o vitrină completă, selecții zilnice proaspete și pictura noastră murală cu pisica. Degustați înainte să cumpărați — ne place să ne împărtășim pasiunea."
+  },
+  contact: {
+    get_in_touch: "Contactați-ne",
+    subtitle: "Ne-ar face plăcere să vă auzim. Contactați echipa noastră din SUA sau Moldova.",
+    nationwide_shipping: "Livrare Națională",
+    email: "Email",
+    service: "Serviciu",
+    nationwide_delivery: "Livrare Națională",
+    flagship_store: "Magazin Principal",
+    address: "Adresă",
+    hours: "Program",
+    hours_daily: "Zilnic 10:00 – 22:00",
+    visit_us: "Vizitați-ne!",
+    visit_desc: "Ne-ar face plăcere să vă cunoaștem la magazinul nostru din Chișinău"
+  },
+  footer: {
+    desc: "Pește afumat premium creat cu generații de tradiție. Din Chișinău în toată lumea.",
+    navigate: "Navighează",
+    contact: "Contact",
+    experience: "Experiență",
+    schedule: "Luni – Duminică",
+    hours: "10:00 – 22:00",
+    moldova: "Moldova",
+    usa: "SUA"
+  }
+};

@@ -1,6 +1,11 @@
+'use client';
+
 import { CheckCircle2, Award, Users, Flame } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function AboutPage() {
+  const { t } = useTranslation();
+
   return (
     <main className="flex-1 w-full bg-background transition-colors duration-500 overflow-x-hidden">
       
@@ -16,9 +21,9 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/90 via-[#1a1a1a]/40 to-transparent" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 pb-12 w-full">
-          <span className="text-sm font-semibold text-white/60 uppercase tracking-wider">About Us</span>
+          <span className="text-sm font-semibold text-white/60 uppercase tracking-wider">{t('about.about_us')}</span>
           <h1 className="text-5xl md:text-7xl font-black text-white mt-2 tracking-tight leading-[0.95]">
-            Our Story
+            {t('about.title')}
           </h1>
         </div>
         {/* Bottom wave */}
@@ -36,25 +41,25 @@ export default function AboutPage() {
             <div className="space-y-6 animate-fade-in-up">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/8 border border-accent/15">
                 <Flame className="h-4 w-4 text-coral" />
-                <span className="text-sm font-semibold text-accent tracking-wide uppercase">The Smokehouse</span>
+                <span className="text-sm font-semibold text-accent tracking-wide uppercase">{t('about.smokehouse')}</span>
               </div>
               
-              <h2 className="text-4xl md:text-5xl font-black text-foreground leading-[1.05] tracking-tight">
-                Produced Entirely<br />By Us
+              <h2 className="text-4xl md:text-5xl font-black text-foreground leading-[1.05] tracking-tight whitespace-pre-line">
+                {t('about.heading')}
               </h2>
               
               <p className="text-lg text-muted leading-relaxed">
-                We offer smoked fish, air-dried fish, and other delicacies carefully prepared for authentic taste and freshness. Our state-of-the-art production facility in Chișinău ensures that every product meets the highest standards of quality.
+                {t('about.desc1')}
               </p>
               <p className="text-lg text-muted leading-relaxed">
-                Every piece of fish is hand-selected, carefully portioned, and prepared using recipes that have been perfected over generations. We believe in transparency, quality, and the art of slow smoking.
+                {t('about.desc2')}
               </p>
 
               <div className="space-y-4 pt-4">
                 {[
-                  "Raw materials are carefully portioned and prepared",
-                  "Approved company recipes with generations of history",
-                  "Strict quality control at every stage of production",
+                  t('about.point1'),
+                  t('about.point2'),
+                  t('about.point3'),
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <div className="mt-0.5 flex-shrink-0 h-6 w-6 rounded-full bg-accent/10 flex items-center justify-center">
@@ -97,25 +102,25 @@ export default function AboutPage() {
       <section className="bg-warm">
         <div className="max-w-5xl mx-auto px-6 py-24">
           <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-black text-foreground tracking-tight">What We Stand For</h2>
-            <p className="text-muted mt-3 text-lg">Our values guide every product we make</p>
+            <h2 className="text-3xl md:text-4xl font-black text-foreground tracking-tight">{t('about.values_title')}</h2>
+            <p className="text-muted mt-3 text-lg">{t('about.values_subtitle')}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { 
                 icon: <Award className="h-7 w-7" />, 
-                title: "Premium Quality", 
-                desc: "Only the finest fish, smoked low and slow using time-tested methods for unmatched flavor." 
+                title: t('about.val1_title'), 
+                desc: t('about.val1_desc') 
               },
               { 
                 icon: <Flame className="h-7 w-7" />, 
-                title: "Traditional Craft", 
-                desc: "Recipes passed down through generations, preserving the authentic taste of artisan smoking." 
+                title: t('about.val2_title'), 
+                desc: t('about.val2_desc') 
               },
               { 
                 icon: <Users className="h-7 w-7" />, 
-                title: "Family Values", 
-                desc: "A family-run business built on trust, integrity, and a passion for feeding people well." 
+                title: t('about.val3_title'), 
+                desc: t('about.val3_desc') 
               },
             ].map((value, i) => (
               <div key={i} className={`animate-fade-in-up delay-${(i+1)*100} bg-surface rounded-3xl p-8 border border-border card-hover text-center`}>
@@ -153,12 +158,12 @@ export default function AboutPage() {
                   <span className="text-2xl">🏪</span>
                 </div>
                 <div>
-                  <h3 className="font-bold text-foreground text-xl">Chișinău Flagship Store</h3>
-                  <p className="text-sm text-muted">Șoseaua Balcani 7B · Open 10:00–22:00</p>
+                  <h3 className="font-bold text-foreground text-xl">{t('about.store_title')}</h3>
+                  <p className="text-sm text-muted">{t('about.store_hours')}</p>
                 </div>
               </div>
               <p className="text-muted leading-relaxed">
-                Visit our flagship location featuring a full deli counter, fresh daily selections, and our signature cat mural. Taste before you buy — we love sharing our passion.
+                {t('about.store_desc')}
               </p>
             </div>
           </div>

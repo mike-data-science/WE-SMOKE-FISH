@@ -1,9 +1,23 @@
 import { PrismaClient, Region } from '@prisma/client'
+import fs from 'fs'
+import path from 'path'
 
 const prisma = new PrismaClient()
 
 async function main() {
   console.log('Seeding the database...')
+
+  // Safely copy bere.png if it exists
+  try {
+    const src = path.join(process.cwd(), 'bere.png');
+    const dest = path.join(process.cwd(), 'public', 'images', 'bere.png');
+    if (fs.existsSync(src)) {
+      fs.copyFileSync(src, dest);
+      console.log('Copied bere.png to public/images');
+    }
+  } catch(e) {
+    console.log('Could not copy bere.png', e);
+  }
 
   // Clear existing products to prevent duplicates/old ones if we want a clean slate
   await prisma.product.deleteMany({});
@@ -31,6 +45,18 @@ async function main() {
     where: { slug: 'party-platters' },
     update: { name: 'Party Platters' },
     create: { name: 'Party Platters', slug: 'party-platters' }
+  })
+
+  const catBeer = await prisma.category.upsert({
+    where: { slug: 'beer' },
+    update: {},
+    create: { name: 'Craft Beer', slug: 'beer' }
+  })
+
+  const catCombos = await prisma.category.upsert({
+    where: { slug: 'combos' },
+    update: {},
+    create: { name: 'Combos', slug: 'combos' }
   })
 
   // Create Products matching the images
@@ -147,7 +173,34 @@ async function main() {
     }
   ]
 
-  for (const product of products) {
+  const comboProducts = [
+    {
+      name: "The Weekend Combo",
+      description: "Smoked Salmon Candy Cubes + Premium Craft Beer.",
+      slug: "weekend-combo-beer",
+      priceUsd: 45.0,
+      priceMdl: 800.0,
+      unit: "per combo",
+      region: Region.BOTH,
+      categoryId: catCombos.id,
+      imageUrl: "/images/468107128_122199836516080814_3620335908023508348_n.jpg,/images/bere.png"
+    },
+    {
+      name: "Cold Pilsner Pack",
+      description: "Refreshing local pilsner.",
+      slug: "cold-pilsner-pack",
+      priceUsd: 20.0,
+      priceMdl: 350.0,
+      unit: "1x 500ml",
+      region: Region.BOTH,
+      categoryId: catBeer.id,
+      imageUrl: "/images/bere.png"
+    }
+  ]
+
+  const allProducts = [...products.map(p => ({ ...p, unit: "100g" })), ...comboProducts];
+
+  for (const product of allProducts) {
     await prisma.product.upsert({
       where: { slug: product.slug },
       update: product,

@@ -8,8 +8,8 @@ export default async function AdminOverview() {
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
       <div>
-        <h1 className="text-3xl font-extrabold text-white tracking-tight">Dashboard Overview</h1>
-        <p className="text-slate-400 mt-1">Welcome back. Here's what's happening with your store today.</p>
+        <h1 className="text-2xl font-black text-white tracking-[0.3em] uppercase">Dashboard Overview</h1>
+        <p className="text-white/40 mt-1 uppercase tracking-[0.1em] text-xs font-medium">Welcome back. Here's what's happening with your store today.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -19,6 +19,7 @@ export default async function AdminOverview() {
           icon={DollarSign}
           trend="12.5%"
           trendUp={true}
+          gradient="from-[#FF007F] to-[#7928CA]"
         />
         <StatCard
           title="Total Orders"
@@ -26,6 +27,7 @@ export default async function AdminOverview() {
           icon={ShoppingCart}
           trend="5.2%"
           trendUp={true}
+          gradient="from-[#00F2FE] to-[#4FACFE]"
         />
         <StatCard
           title="Active Products"
@@ -41,8 +43,8 @@ export default async function AdminOverview() {
         />
       </div>
 
-      <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6 backdrop-blur-sm">
-        <h2 className="text-xl font-bold text-white mb-6">Recent Orders</h2>
+      <div className="bg-[#000] border border-white/10 rounded-[2rem] p-4 md:p-8 shadow-[0_0_20px_rgba(0,51,255,0.05)]">
+        <h2 className="text-sm font-black text-white mb-6 uppercase tracking-[0.2em]">Recent Orders</h2>
         
         {stats.recentOrders.length === 0 ? (
           <div className="text-center py-12 text-slate-500">
@@ -51,7 +53,7 @@ export default async function AdminOverview() {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm text-left">
-              <thead className="text-xs text-slate-400 uppercase bg-white/5 border-b border-white/10">
+              <thead className="text-[10px] text-white/40 uppercase tracking-[0.2em] bg-white/5 border-b border-white/10 font-black">
                 <tr>
                   <th className="px-6 py-4 font-medium rounded-tl-lg">Order ID</th>
                   <th className="px-6 py-4 font-medium">Customer</th>

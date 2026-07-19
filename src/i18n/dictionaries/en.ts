@@ -1,0 +1,161 @@
+export const en = {
+  nav: {
+    home: "Home",
+    products: "Products",
+    shop: "Shop",
+    about: "About",
+    contact: "Contact",
+    premium_variant: "Premium Variant",
+    cinematic: "Cinematic",
+    presentation: "Presentation"
+  },
+  hero: {
+    subtitle: "A symphony of smoke and sea",
+    title_prefix: "Unveiling the",
+    title_main: "Art of Cold Smoking",
+    description: "Experience a tradition reimagined. Slowly smoked over select hardwoods for an unforgettable, melt-in-your-mouth texture.",
+    preorder: "Pre-order Collection",
+    discover: "Discover Our Process",
+    variant_a: "Variant A",
+    variant_b: "Variant B",
+    wait_is_over_1: "THE WAIT",
+    wait_is_over_2: "IS OVER",
+    we_are_1: "We Are",
+    we_are_2: "WE",
+    we_are_3: "ARE",
+    open: "Open",
+    scroll_down: "Scroll Down",
+    scroll: "Scroll",
+    display_style: "Display Style",
+    empty_tray: "Empty Tray",
+    style_authentic: "Authentic Deli",
+    style_modern: "Modern Slate",
+    style_smokehouse: "White Wood"
+  },
+  products: {
+    subtitle: "Fresh from the Smoker",
+    title: "Artisan Selection",
+    view_all: "View All Products",
+    unit: "100g"
+  },
+  gallery: {
+    subtitle: "Behind the scenes",
+    title: "Inside the Smokehouse",
+    meet_makers: "Meet the Makers",
+    watch_tiktok: "Watch more on TikTok"
+  },
+  testimonials: {
+    subtitle: "Testimonials",
+    title: "What our clients say",
+    description: "Discover what our community has to say about the unparalleled flavor of our authentic smoked salmon.",
+    google_review: "Google Review"
+  },
+  location: {
+    subtitle: "Location",
+    title: "Where to find us",
+    address: "Șos. Balcani 7B",
+    phone: "Tel. 061222213",
+    schedule: "Mon - Sun:",
+    hours: "10:00 AM - 10:00 PM",
+    get_directions: "Get Directions"
+  },
+  outro: {
+    title: "Taste True Smoke",
+    enter_shop: "Enter the Shop"
+  },
+  cinematic: {
+    hero_subtitle: "The Journey",
+    hero_title: "A Legacy of Smoke",
+    hero_desc: "The director's cut of smoked fish. Uncompromising quality, cinematic flavor.",
+    explore: "Explore Collection",
+    featured_subtitle: "Starring Roles",
+    featured_title: "The Cast",
+    view_full_cast: "View Full Cast",
+    view_details: "View Details",
+    classic: "Classic",
+    reserve: "Reserve",
+    social_echo: "Social Echo",
+    the_vibe: "The Vibe",
+    tag_sustainable: "Sustainably Sourced",
+    tag_premium: "Premium Salmon",
+    tag_wild: "Wild Caught"
+  },
+  premium: {
+    hero_title: "The Finest Cut",
+    hero_desc: "Reserved for the true connoisseurs.",
+    join_waitlist: "Join Waitlist",
+    explore: "Explore",
+    community_title1: "Community &",
+    community_title2: "Craft",
+    community_desc: "See what our community is saying and watch the craft in action. Tag us on Instagram or TikTok to be featured.",
+    footer_desc: "The absolute pinnacle of traditional smoked fish. Uncompromising quality and real wood fire.",
+    menu: "Menu",
+    social: "Social",
+    newsletter: "Newsletter",
+    subscribe: "Subscribe",
+    enter_email: "Enter your email",
+    find: "Find",
+    us: "Us",
+    hq_title: "Moldova HQ",
+    hq_address: "Strada Afumatori 12, Chisinau, Moldova",
+    hq_hours: "Open 10:00 - 22:00",
+    our_story: "Our Story",
+    locations: "Locations"
+  },
+  menu: {
+    get_in_touch: "Get in Touch"
+  },
+  shop: {
+    categories: "Categories",
+    all_products: "All Products",
+    showing_products_for: "Showing products for",
+    no_products_found: "No Products Found",
+    no_products_desc: "The database hasn't been seeded yet. Please run the seed command to populate the store."
+  },
+  about: {
+    about_us: "About Us",
+    title: "Our Story",
+    smokehouse: "The Smokehouse",
+    heading: "Produced Entirely\nBy Us",
+    desc1: "We offer smoked fish, air-dried fish, and other delicacies carefully prepared for authentic taste and freshness. Our state-of-the-art production facility in Chișinău ensures that every product meets the highest standards of quality.",
+    desc2: "Every piece of fish is hand-selected, carefully portioned, and prepared using recipes that have been perfected over generations. We believe in transparency, quality, and the art of slow smoking.",
+    point1: "Raw materials are carefully portioned and prepared",
+    point2: "Approved company recipes with generations of history",
+    point3: "Strict quality control at every stage of production",
+    values_title: "What We Stand For",
+    values_subtitle: "Our values guide every product we make",
+    val1_title: "Premium Quality",
+    val1_desc: "Only the finest fish, smoked low and slow using time-tested methods for unmatched flavor.",
+    val2_title: "Traditional Craft",
+    val2_desc: "Recipes passed down through generations, preserving the authentic taste of artisan smoking.",
+    val3_title: "Family Values",
+    val3_desc: "A family-run business built on trust, integrity, and a passion for feeding people well.",
+    store_title: "Chișinău Flagship Store",
+    store_hours: "Șoseaua Balcani 7B · Open 10:00–22:00",
+    store_desc: "Visit our flagship location featuring a full deli counter, fresh daily selections, and our signature cat mural. Taste before you buy — we love sharing our passion."
+  },
+  contact: {
+    get_in_touch: "Get in Touch",
+    subtitle: "We'd love to hear from you. Reach out to our team in the US or Moldova.",
+    nationwide_shipping: "Nationwide Shipping",
+    email: "Email",
+    service: "Service",
+    nationwide_delivery: "Nationwide Delivery",
+    flagship_store: "Flagship Store",
+    address: "Address",
+    hours: "Hours",
+    hours_daily: "10:00 – 22:00 Daily",
+    visit_us: "Come Visit Us!",
+    visit_desc: "We'd love to meet you at our Chișinău store"
+  },
+  footer: {
+    desc: "Premium smoked fish crafted with generations of tradition. From Chișinău to the world.",
+    navigate: "Navigate",
+    contact: "Contact",
+    experience: "Experience",
+    schedule: "Monday – Sunday",
+    hours: "10:00 – 22:00",
+    moldova: "Moldova",
+    usa: "USA"
+  }
+};

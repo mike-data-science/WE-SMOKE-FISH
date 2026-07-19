@@ -70,8 +70,7 @@ export default function NewProductPage() {
     setIsSubmitting(false);
 
     if (res.success) {
-      router.push('/admin/products');
-      router.refresh();
+      window.location.href = '/admin/products';
     } else {
       alert("Failed to create product: " + res.error);
     }

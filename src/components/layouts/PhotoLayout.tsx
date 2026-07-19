@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { ArrowRight, MapPin, Clock, Star } from "lucide-react";
 import PhotoHero from "../PhotoHero";
-import photoBg from "../../../recreate_picture_better_qualities_2K_202607160953.jpeg";
-import productsBg from "../../../Fish_market_display_case_products_202607161742.jpeg";
 import { useRegionStore } from '@/store/useRegionStore';
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
@@ -35,9 +33,9 @@ export default function PhotoLayout({
       {/* Fixed Environmental Background with Parallax Overlay */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <motion.div 
-          className="absolute inset-0 w-full h-[150%]"
+          className="absolute inset-0 w-full h-[120%]"
           style={{
-            backgroundImage: `url(${photoBg.src})`,
+            backgroundImage: `url(/images/recreate_picture_better_qualities_2K_202607160953.jpeg)`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             y: heroY
@@ -53,7 +51,7 @@ export default function PhotoLayout({
         {/* ==================== HERO SECTION ==================== */}
         <section className="relative">
           {renderToggleButtons()}
-          <PhotoHero heroBgSrc={photoBg.src} productsBgSrc={productsBg.src} />
+          <PhotoHero heroBgSrc="/images/recreate_picture_better_qualities_2K_202607160953.jpeg" productsBgSrc="/images/Fish_market_display_case_products_202607171530.jpeg" />
         </section>
 
         {/* ==================== THE STORY SCROLL (INTERACTIVE) ==================== */}

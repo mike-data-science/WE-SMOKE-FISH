@@ -4,11 +4,10 @@ import Link from "next/link";
 import { ArrowRight, MapPin, Clock, Star, Camera, Play } from "lucide-react";
 import HybridHero from "../HybridHero";
 import Menu from "../Menu";
-import photoBg from "../../../recreate_picture_better_qualities_2K_202607160953.jpeg";
-import bricksBg from "../../../materials/bricks.jpeg";
 import { useRegionStore } from '@/store/useRegionStore';
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { useTranslation } from '../../hooks/useTranslation';
 
 export default function PremiumLayout({ 
   renderToggleButtons, 
@@ -19,6 +18,7 @@ export default function PremiumLayout({
 }) {
   const region = useRegionStore((state) => state.region);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -48,7 +48,7 @@ export default function PremiumLayout({
         <motion.div 
           className="absolute inset-0 w-full h-[120%]"
           style={{
-            backgroundImage: `url(${photoBg.src})`,
+            backgroundImage: `url(/images/recreate_picture_better_qualities_2K_202607160953.jpeg)`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             y: bgY,
@@ -66,86 +66,19 @@ export default function PremiumLayout({
           className="relative"
         >
           {renderToggleButtons()}
-          <HybridHero heroBgSrc={photoBg.src} />
+          <HybridHero heroBgSrc="/images/recreate_picture_better_qualities_2K_202607160953.jpeg" />
         </section>
 
-        {/* ==================== DYNAMIC STORE SECTION (BRICK TEXTURE) ==================== */}
-        <section 
-          className="py-32 relative overflow-hidden shadow-[inset_0_20px_50px_rgba(0,0,0,0.9)]"
-          style={{
-            backgroundImage: `url(${bricksBg.src})`,
-            backgroundSize: '800px auto',
-            backgroundRepeat: 'repeat',
-            backgroundPosition: 'center top'
-          }}
-        >
-          {/* Dynamic lighting overlay */}
-          <div 
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#ff8c42]/15 rounded-full blur-[150px] pointer-events-none mix-blend-color-dodge z-0"
-          />
-          <div className="absolute inset-0 bg-[#050201]/80 z-0"></div>
 
-          <div className="max-w-7xl mx-auto px-6 relative z-10">
-            <motion.div 
-              initial={{ opacity: 0, rotateX: 20, y: 100 }}
-              whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="relative rounded-[2rem] overflow-hidden p-8 md:p-16 border border-[#3a2012]/50 shadow-[0_40px_80px_rgba(0,0,0,0.9)] bg-[#0a0503]/80 backdrop-blur-2xl"
-              
-              
-            >
-              <div className="absolute top-0 right-0 w-full h-full opacity-30 bg-[radial-gradient(circle_at_top_right,_#ff8c42_0%,_transparent_60%)] pointer-events-none"></div>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
-                <div className="space-y-10">
-                  <h2 className="text-5xl md:text-7xl font-black text-white leading-[1.1] drop-shadow-xl">
-                    The <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#ffb84d] to-[#ff4a1c]">Smokehouse</span>
-                  </h2>
-                  <p className="text-white/70 text-xl font-medium max-w-md leading-relaxed">
-                    Step into the heat. Smell the cherry wood. Experience the craft in person.
-                  </p>
-                  
-                  <div className="flex flex-col sm:flex-row gap-6 pt-4">
-                    <Link
-                      href="/contact"
-                      className="group relative inline-flex items-center justify-center h-16 px-10 rounded-2xl bg-gradient-to-r from-[#ff6b2b] to-[#ff8c42] text-[#120804] font-black text-[15px] uppercase tracking-widest overflow-hidden shadow-[0_10px_30px_rgba(255,107,43,0.3)] border border-[#ffa66b]"
-                    >
-                      <div className="absolute inset-0 w-full h-full bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                      <span className="relative z-10">Get Directions</span>
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.9)] border border-white/10 group cursor-none">
-                  <img src="/images/interior.png" alt="Smokehouse" className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-[2s] ease-out sepia-[0.3] brightness-75" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0503] via-black/20 to-transparent"></div>
-                  
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
-                    className="absolute bottom-8 left-8"
-                  >
-                    <div className="flex items-center gap-3 bg-[#120804]/90 backdrop-blur-md border border-[#ff8c42]/30 rounded-full px-6 py-3 shadow-2xl">
-                      <Clock className="h-5 w-5 text-[#ffb84d]" />
-                      <span className="text-white font-bold tracking-widest uppercase text-xs">Open 10:00 – 22:00</span>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
 
         {/* ==================== SOCIAL & TESTIMONIALS SECTION (NEW) ==================== */}
         <section className="py-32 relative bg-[#050201] border-t border-[#1a0a05] overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 mb-16">
             <h2 className="text-4xl md:text-6xl font-black text-white mb-4">
-              Community & <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ffb84d] to-[#ff4a1c]">Craft</span>
+              {t('premium.community_title1')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ffb84d] to-[#ff4a1c]">{t('premium.community_title2')}</span>
             </h2>
             <p className="text-white/50 text-lg font-medium max-w-2xl">
-              See what our community is saying and watch the craft in action. Tag us on Instagram or TikTok to be featured.
+              {t('premium.community_desc')}
             </p>
           </div>
 
@@ -351,11 +284,11 @@ export default function PremiumLayout({
                 {/* Tooltip on hover */}
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-6 w-72 bg-[#0a0503]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto z-20 shadow-2xl">
                   <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-[#0a0503]/90 border-b border-r border-white/10 rotate-45 backdrop-blur-xl"></div>
-                  <h3 className="text-[#ffb84d] font-black text-lg mb-1">Moldova HQ</h3>
-                  <p className="text-white/70 text-sm mb-4">Strada Afumatori 12, Chisinau, Moldova</p>
+                  <h3 className="text-[#ffb84d] font-black text-lg mb-1">{t('premium.hq_title')}</h3>
+                  <p className="text-white/70 text-sm mb-4">{t('premium.hq_address')}</p>
                   <div className="flex items-center gap-2 text-white/50 text-xs uppercase tracking-widest font-bold">
                     <Clock className="w-3 h-3" />
-                    <span>Open 10:00 - 22:00</span>
+                    <span>{t('premium.hq_hours')}</span>
                   </div>
                 </div>
               </div>
@@ -365,7 +298,7 @@ export default function PremiumLayout({
           {/* Section Header Overlay */}
           <div className="absolute top-16 left-6 md:left-16 pointer-events-none">
             <h2 className="text-4xl md:text-6xl font-black text-white mix-blend-overlay opacity-80">
-              Find<br/>Us
+              {t('premium.find')}<br/>{t('premium.us')}
             </h2>
           </div>
         </section>
@@ -381,14 +314,21 @@ export default function PremiumLayout({
                   <span className="text-[18px] font-black text-white self-center" style={{ marginLeft: '0.2em' }}>fish</span>
                 </div>
                 <p className="text-white/50 text-sm font-medium leading-relaxed">
-                  The absolute pinnacle of traditional smoked fish. Uncompromising quality and real wood fire.
+                  {t('premium.footer_desc')}
                 </p>
               </div>
 
               <div>
-                <h4 className="text-[#ffb84d] font-bold text-xs uppercase tracking-[0.3em] mb-8">Menu</h4>
+                <h4 className="text-[#ffb84d] font-bold text-xs uppercase tracking-[0.3em] mb-8">{t('premium.menu')}</h4>
                 <div className="space-y-4">
-                  {['Shop', 'Our Story', 'Locations', 'Contact'].map((item) => (
+                  {['Shop', 'Our Story', 'Locations', 'Contact'].map((item) => {
+                    const keyMap: Record<string, string> = {
+                      'Shop': 'nav.shop',
+                      'Our Story': 'premium.our_story',
+                      'Locations': 'premium.locations',
+                      'Contact': 'nav.contact'
+                    };
+                    return (
                     <Link 
                       key={item} 
                       href={item === 'Shop' ? '/shop' : `/${item.toLowerCase().replace(' ', '-')}`} 
@@ -396,14 +336,14 @@ export default function PremiumLayout({
                       
                       
                     >
-                      {item}
+                      {t(keyMap[item])}
                     </Link>
-                  ))}
+                  )})}
                 </div>
               </div>
 
               <div>
-                <h4 className="text-[#ffb84d] font-bold text-xs uppercase tracking-[0.3em] mb-8">Social</h4>
+                <h4 className="text-[#ffb84d] font-bold text-xs uppercase tracking-[0.3em] mb-8">{t('premium.social')}</h4>
                 <div className="space-y-4">
                   {['Instagram', 'Facebook', 'TikTok'].map((item) => (
                     <a 
@@ -420,11 +360,11 @@ export default function PremiumLayout({
               </div>
 
               <div>
-                <h4 className="text-[#ffb84d] font-bold text-xs uppercase tracking-[0.3em] mb-8">Newsletter</h4>
+                <h4 className="text-[#ffb84d] font-bold text-xs uppercase tracking-[0.3em] mb-8">{t('premium.newsletter')}</h4>
                 <div className="flex flex-col gap-4">
                   <input 
                     type="email" 
-                    placeholder="Enter your email" 
+                    placeholder={t('premium.enter_email')} 
                     className="h-12 w-full bg-white/5 border-b border-white/20 text-white px-2 focus:outline-none focus:border-[#ff8c42] transition-colors"
                     
                     
@@ -434,7 +374,7 @@ export default function PremiumLayout({
                     
                     
                   >
-                    Subscribe
+                    {t('premium.subscribe')}
                   </button>
                 </div>
               </div>
@@ -442,7 +382,7 @@ export default function PremiumLayout({
 
             <div className="border-t border-[#2a140a] pt-8 flex justify-between items-center text-white/30 text-xs font-bold tracking-widest uppercase">
               <p>© {new Date().getFullYear()} WE SMOKE FISH</p>
-              <p>MOLDOVA / USA</p>
+              <p>{t('footer.moldova')} / {t('footer.usa')}</p>
             </div>
           </div>
         </footer>

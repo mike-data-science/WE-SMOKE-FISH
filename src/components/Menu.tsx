@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import Link from 'next/link';
 import { Menu as MenuIcon, X } from 'lucide-react';
+import { useTranslation } from '../hooks/useTranslation';
 
 const navLinks = [
   { name: 'Home', href: '/' },
@@ -15,6 +16,7 @@ const navLinks = [
 
 export default function Menu() {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   // Prevent scrolling when menu is open
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function Menu() {
     };
   }, [isOpen]);
 
-  const menuVariants = {
+  const menuVariants: Variants = {
     closed: {
       opacity: 0,
       clipPath: 'circle(0% at 100% 0%)',
@@ -41,7 +43,7 @@ export default function Menu() {
     }
   };
 
-  const linkVariants = {
+  const linkVariants: Variants = {
     closed: { y: 100, opacity: 0 },
     open: (i: number) => ({
       y: 0,
@@ -100,7 +102,7 @@ export default function Menu() {
                         0{i + 1}
                       </span>
                       <span className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter transition-all duration-500 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#ffb84d] group-hover:to-[#ff4a1c] group-hover:pl-4">
-                        {link.name}
+                        {t(`nav.${link.name.toLowerCase().replace(' ', '_')}`)}
                       </span>
                     </Link>
                   </motion.div>
@@ -116,7 +118,7 @@ export default function Menu() {
               className="absolute bottom-12 left-12 right-12 flex justify-between items-end border-t border-white/10 pt-8"
             >
               <div className="flex flex-col text-sm text-white/50">
-                <span className="text-white font-bold mb-2 uppercase tracking-widest">Get in Touch</span>
+                <span className="text-white font-bold mb-2 uppercase tracking-widest">{t('menu.get_in_touch')}</span>
                 <span>hello@wesmokefish.com</span>
                 <span>+1 (555) 123-4567</span>
               </div>

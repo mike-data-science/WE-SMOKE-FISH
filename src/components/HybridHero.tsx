@@ -6,6 +6,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRegionStore } from '../store/useRegionStore';
+import { useTranslation } from '../hooks/useTranslation';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,6 +25,7 @@ export default function HybridHero({ heroBgSrc }: HybridHeroProps) {
   const region = useRegionStore((state) => state.region);
   const [realProducts, setRealProducts] = useState<any[]>([]);
   const [vitrineStyle, setVitrineStyle] = useState<'authentic' | 'modern' | 'smokehouse'>('authentic');
+  const { t } = useTranslation();
 
   useEffect(() => {
     setMounted(true);
@@ -131,7 +133,7 @@ export default function HybridHero({ heroBgSrc }: HybridHeroProps) {
       trayEmpty: 'text-[#3a2012]',
       tagHolder: 'bg-[#1a1a1a] text-white',
       tagPeg: 'bg-[#444]',
-      name: 'Authentic Deli',
+      name: t('hero.style_authentic'),
     },
     modern: {
       backWall: 'bg-gradient-to-b from-[#111] to-[#000] border-[#222]',
@@ -147,7 +149,7 @@ export default function HybridHero({ heroBgSrc }: HybridHeroProps) {
       trayEmpty: 'text-white/40',
       tagHolder: 'bg-white text-black',
       tagPeg: 'bg-[#ddd]',
-      name: 'Modern Slate',
+      name: t('hero.style_modern'),
     },
     smokehouse: {
       backWall: 'bg-gradient-to-b from-[#fcfbf9] to-[#f0ece1] border-[#e3dac9]',
@@ -163,7 +165,7 @@ export default function HybridHero({ heroBgSrc }: HybridHeroProps) {
       trayEmpty: 'text-[#a39887]/50',
       tagHolder: 'bg-[#ffffff] text-[#5c4a3d] border-[#e3dac9]',
       tagPeg: 'bg-[#d1c7b3]',
-      name: 'White Wood',
+      name: t('hero.style_smokehouse'),
     }
   };
 
@@ -208,7 +210,7 @@ export default function HybridHero({ heroBgSrc }: HybridHeroProps) {
         
         {/* Style Toggle UI */}
         <div className="absolute top-[30vh] right-[2vw] z-[100] flex flex-col gap-2 bg-black/40 p-2.5 rounded-2xl backdrop-blur-xl border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.5)]">
-          <div className="text-[10px] uppercase tracking-widest text-white/50 mb-1 px-2 font-bold">Display Style</div>
+          <div className="text-[10px] uppercase tracking-widest text-white/50 mb-1 px-2 font-bold">{t('hero.display_style')}</div>
           {Object.keys(vitrineStyles).map((key) => {
             const styleKey = key as 'authentic' | 'modern' | 'smokehouse';
             return (
@@ -362,7 +364,7 @@ export default function HybridHero({ heroBgSrc }: HybridHeroProps) {
                             >
                               <div className="w-full h-full relative rounded-md shadow-[0_20px_40px_rgba(0,0,0,0.9)] overflow-hidden bg-black/80 border-[2px] border-white/10 group-hover:border-[#cca677]/80 group-hover:shadow-[0_40px_80px_rgba(204,166,119,0.4)] transition-all duration-500">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src={require('../../smoked_fish.webp').default.src} alt={item.name} className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-110" />
+                                <img src="/images/smoked_fish.webp" alt={item.name} className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-110" />
                                 <div className="absolute inset-0 pointer-events-none">
                                   {/* White label removed per user request */}
                                 </div>
@@ -370,7 +372,7 @@ export default function HybridHero({ heroBgSrc }: HybridHeroProps) {
                             </Link>
                           ) : (
                             <div className="absolute inset-[10%] opacity-40 shadow-[inset_0_10px_20px_rgba(0,0,0,0.5)] border border-black/20 flex items-center justify-center">
-                              <span className={`text-[10px] font-bold uppercase tracking-[0.2em] mix-blend-color-burn ${activeStyle.trayEmpty}`}>Empty Tray</span>
+                              <span className={`text-[10px] font-bold uppercase tracking-[0.2em] mix-blend-color-burn ${activeStyle.trayEmpty}`}>{t('hero.empty_tray')}</span>
                             </div>
                           )}
                        </div>
@@ -396,7 +398,7 @@ export default function HybridHero({ heroBgSrc }: HybridHeroProps) {
         </div>
 
         <div ref={scrollIndicatorRef} className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-1">
-          <span className="text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] uppercase text-black/40 mix-blend-multiply">Scroll</span>
+          <span className="text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] uppercase text-black/40 mix-blend-multiply">{t('hero.scroll')}</span>
           <ChevronDown className="h-4 w-4 text-black/40 mix-blend-multiply" />
         </div>
       </div>

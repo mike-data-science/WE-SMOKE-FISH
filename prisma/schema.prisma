@@ -38,6 +38,7 @@ model Product {
   imageUrl    String?
   priceUsd    Float?
   priceMdl    Float?
+  unit        String?     @default("100g")
   region      Region      @default(BOTH)
   categoryId    Int
   category      Category      @relation(fields: [categoryId], references: [id])

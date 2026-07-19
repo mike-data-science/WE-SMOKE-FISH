@@ -124,6 +124,51 @@ export async function createSubcategory(data: { name: string; slug: string; cate
   }
 }
 
+export async function updateCategory(id: number, data: { name: string; slug: string }) {
+  try {
+    const category = await prisma.category.update({ where: { id }, data });
+    return { success: true, category };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+}
+
+export async function deleteCategory(id: number) {
+  try {
+    // Check if category has products
+    const productCount = await prisma.product.count({ where: { categoryId: id } });
+    if (productCount > 0) {
+      return { success: false, error: `Cannot delete category because it contains ${productCount} products.` };
+    }
+    await prisma.category.delete({ where: { id } });
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+}
+
+export async function updateSubcategory(id: number, data: { name: string; slug: string }) {
+  try {
+    const subcategory = await prisma.subcategory.update({ where: { id }, data });
+    return { success: true, subcategory };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+}
+
+export async function deleteSubcategory(id: number) {
+  try {
+    const productCount = await prisma.product.count({ where: { subcategoryId: id } });
+    if (productCount > 0) {
+      return { success: false, error: `Cannot delete subcategory because it contains ${productCount} products.` };
+    }
+    await prisma.subcategory.delete({ where: { id } });
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+}
+
 export async function createProduct(data: {
   name: string;
   slug: string;
@@ -145,5 +190,52 @@ export async function createProduct(data: {
     return { success: true, product };
   } catch (error: any) {
     return { success: false, error: error.message };
+  }
+}
+
+export async function updateProduct(id: number, data: any) {
+  try {
+    const productData = { ...data };
+    if (!productData.subcategoryId || productData.subcategoryId <= 0) {
+      productData.subcategoryId = null; // Disconnect subcategory if null
+    }
+    const product = await prisma.product.update({
+      where: { id },
+      data: productData
+    });
+    return { success: true, product };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+}
+
+export async function deleteProduct(id: number) {
+  try {
+    // Check if product is referenced in any orders
+    const orderCount = await prisma.orderItem.count({
+      where: { productId: id }
+    });
+    
+    if (orderCount > 0) {
+      return { success: false, error: `Cannot delete product because it has been ordered ${orderCount} times. Delete the orders first.` };
+    }
+
+    await prisma.product.delete({
+      where: { id }
+    });
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+}
+
+export async function getProduct(id: number) {
+  try {
+    return await prisma.product.findUnique({
+      where: { id }
+    });
+  } catch (error) {
+    console.error("Failed to fetch product:", error);
+    return null;
   }
 }
