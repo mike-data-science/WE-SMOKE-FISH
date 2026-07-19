@@ -26,6 +26,7 @@ export default function PresentationLayout({ renderToggleButtons, realProducts }
   const presentationRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
+  const [hasEntered, setHasEntered] = useState(false);
   const [heroVariant, setHeroVariant] = useState<'A' | 'B'>('A');
   const [reviewVariant, setReviewVariant] = useState<'A' | 'B'>('B');
   const { t } = useTranslation();
@@ -36,7 +37,7 @@ export default function PresentationLayout({ renderToggleButtons, realProducts }
     if (!videoRef.current) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && hasEntered) {
           videoRef.current?.play().catch(() => {});
         } else {
           videoRef.current?.pause();
@@ -46,7 +47,7 @@ export default function PresentationLayout({ renderToggleButtons, realProducts }
     );
     observer.observe(videoRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [hasEntered, heroVariant]);
 
   // GSAP Animations
   useGSAP(() => {
@@ -186,7 +187,7 @@ export default function PresentationLayout({ renderToggleButtons, realProducts }
 
 
       {/* Scroll indicator dots */}
-      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-4">
+      <div className={`fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-4 transition-opacity duration-1000 ${hasEntered ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
         {[0, 1, 2, 3, 4, 5].map((idx) => (
           <button 
             key={idx}
@@ -200,7 +201,7 @@ export default function PresentationLayout({ renderToggleButtons, realProducts }
       <div 
         id="presentation-container"
         onScroll={handleScroll}
-        className="h-[100dvh] w-full overflow-y-auto overflow-x-hidden scroll-smooth hide-scrollbar"
+        className={`h-[100dvh] w-full overflow-y-auto overflow-x-hidden scroll-smooth hide-scrollbar transition-opacity duration-1000 ${hasEntered ? 'opacity-100' : 'opacity-0 overflow-hidden'}`}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         
@@ -243,7 +244,7 @@ export default function PresentationLayout({ renderToggleButtons, realProducts }
                 </div>
 
                 <div className="hero-video-container relative w-full max-w-[320px] aspect-[9/16] md:max-w-none md:w-auto md:h-[80vh] md:aspect-[9/16] rounded-[2rem] overflow-hidden shadow-[0_0_50px_rgba(0,51,255,0.2)] bg-black shrink-0">
-                  <video src="/videos/5.mp4" autoPlay loop muted={isMuted} playsInline className="absolute inset-0 w-full h-full object-cover" />
+                  <video ref={videoRef} src="/videos/5.mp4" loop muted={isMuted} playsInline className="absolute inset-0 w-full h-full object-cover" />
                   <button onClick={(e) => { e.stopPropagation(); setIsMuted(!isMuted); }} className="absolute bottom-4 right-4 z-50 bg-black/50 hover:bg-black/80 backdrop-blur-md p-3 rounded-full text-white transition-all border border-white/10 shadow-lg pointer-events-auto">
                     {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
                   </button>
@@ -258,7 +259,7 @@ export default function PresentationLayout({ renderToggleButtons, realProducts }
                 </div>
 
                 <div className="hero-video-container relative w-full max-w-[320px] aspect-[9/16] md:max-w-none md:w-auto md:h-[80vh] md:aspect-[9/16] rounded-[2rem] overflow-hidden shadow-[0_0_50px_rgba(0,51,255,0.2)] bg-black shrink-0">
-                  <video src="/videos/5.mp4" autoPlay loop muted={isMuted} playsInline className="absolute inset-0 w-full h-full object-cover" />
+                  <video ref={videoRef} src="/videos/5.mp4" loop muted={isMuted} playsInline className="absolute inset-0 w-full h-full object-cover" />
                   <button onClick={(e) => { e.stopPropagation(); setIsMuted(!isMuted); }} className="absolute bottom-4 right-4 z-50 bg-black/50 hover:bg-black/80 backdrop-blur-md p-3 rounded-full text-white transition-all border border-white/10 shadow-lg pointer-events-auto">
                     {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
                   </button>
@@ -649,6 +650,39 @@ export default function PresentationLayout({ renderToggleButtons, realProducts }
         </section>
 
       </div>
+
+      {/* Enter Experience Overlay */}
+      {!hasEntered && (
+        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute inset-0 bg-black" />
+          </div>
+          <div className="relative z-10 flex flex-col items-center text-center px-6 animate-in fade-in duration-1000">
+            <h1 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-8 drop-shadow-2xl">
+              We Smoke Fish
+            </h1>
+            <button 
+              onClick={() => {
+                setHasEntered(true);
+                setIsMuted(false);
+                if (videoRef.current) {
+                  videoRef.current.currentTime = 0;
+                  videoRef.current.play().catch(() => {});
+                }
+              }}
+              className="group relative overflow-hidden bg-white text-black px-12 py-4 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform duration-300 shadow-[0_0_40px_rgba(255,255,255,0.2)]"
+            >
+              <span className="relative z-10 flex items-center gap-3">
+                {t('outro.enter_shop')}
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#0033FF]/20 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
+            </button>
+            <p className="text-white/50 text-[10px] md:text-xs mt-6 uppercase tracking-[0.2em] font-bold">
+              Click to enter with sound
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
