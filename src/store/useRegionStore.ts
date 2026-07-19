@@ -14,7 +14,7 @@ interface RegionState {
 export const useRegionStore = create<RegionState>()(
   persist(
     (set) => ({
-      region: null,
+      region: 'US',
       currency: '$',
       isHydrated: false,
       setRegion: (region) =>

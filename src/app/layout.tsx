@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import RegionModal from "@/components/RegionModal";
 import ThemeProvider from "@/components/ThemeProvider";
 
 const inter = Inter({
@@ -33,7 +32,6 @@ export default function RootLayout({
               {children}
             </main>
           </div>
-          <RegionModal />
         </ThemeProvider>
       </body>
     </html>
