@@ -3,6 +3,13 @@
 import { PrismaClient } from '@prisma/client';
 import { writeFile } from 'fs/promises';
 import { join } from 'path';
+import { revalidatePath } from 'next/cache';
+
+function revalidateAll() {
+  revalidatePath('/admin', 'layout');
+  revalidatePath('/shop', 'layout');
+  revalidatePath('/', 'layout');
+}
 
 let prismaInstance: PrismaClient;
 
@@ -121,6 +128,7 @@ export async function createCategory(data: { name: string; slug: string }) {
   try {
     const prisma = getPrisma();
     const category = await prisma.category.create({ data });
+    revalidateAll();
     return { success: true, category };
   } catch (error: any) {
     return { success: false, error: error.message };
@@ -131,6 +139,7 @@ export async function createSubcategory(data: { name: string; slug: string; cate
   try {
     const prisma = getPrisma();
     const subcategory = await prisma.subcategory.create({ data });
+    revalidateAll();
     return { success: true, subcategory };
   } catch (error: any) {
     return { success: false, error: error.message };
@@ -141,6 +150,7 @@ export async function updateCategory(id: number, data: { name: string; slug: str
   try {
     const prisma = getPrisma();
     const category = await prisma.category.update({ where: { id }, data });
+    revalidateAll();
     return { success: true, category };
   } catch (error: any) {
     return { success: false, error: error.message };
@@ -156,8 +166,13 @@ export async function deleteCategory(id: number) {
       return { success: false, error: `Cannot delete category because it contains ${productCount} products.` };
     }
     await prisma.category.delete({ where: { id } });
+    revalidateAll();
     return { success: true };
   } catch (error: any) {
+    if (error.code === 'P2025') {
+      revalidateAll();
+      return { success: true };
+    }
     return { success: false, error: error.message };
   }
 }
@@ -166,6 +181,7 @@ export async function updateSubcategory(id: number, data: { name: string; slug: 
   try {
     const prisma = getPrisma();
     const subcategory = await prisma.subcategory.update({ where: { id }, data });
+    revalidateAll();
     return { success: true, subcategory };
   } catch (error: any) {
     return { success: false, error: error.message };
@@ -180,8 +196,13 @@ export async function deleteSubcategory(id: number) {
       return { success: false, error: `Cannot delete subcategory because it contains ${productCount} products.` };
     }
     await prisma.subcategory.delete({ where: { id } });
+    revalidateAll();
     return { success: true };
   } catch (error: any) {
+    if (error.code === 'P2025') {
+      revalidateAll();
+      return { success: true };
+    }
     return { success: false, error: error.message };
   }
 }
@@ -205,6 +226,7 @@ export async function createProduct(data: {
       delete productData.subcategoryId;
     }
     const product = await prisma.product.create({ data: productData });
+    revalidateAll();
     return { success: true, product };
   } catch (error: any) {
     return { success: false, error: error.message };
@@ -222,6 +244,7 @@ export async function updateProduct(id: number, data: any) {
       where: { id },
       data: productData
     });
+    revalidateAll();
     return { success: true, product };
   } catch (error: any) {
     return { success: false, error: error.message };
@@ -243,8 +266,13 @@ export async function deleteProduct(id: number) {
     await prisma.product.delete({
       where: { id }
     });
+    revalidateAll();
     return { success: true };
   } catch (error: any) {
+    if (error.code === 'P2025') {
+      revalidateAll();
+      return { success: true };
+    }
     return { success: false, error: error.message };
   }
 }
